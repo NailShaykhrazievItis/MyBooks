@@ -56,4 +56,3 @@ fun Application.module() {
 }
 
 const val API_VERSION = "/api/v1"
-
