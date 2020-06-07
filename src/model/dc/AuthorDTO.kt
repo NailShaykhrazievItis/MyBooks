@@ -1,6 +1,6 @@
 package com.example.model.dc
 
-data class Author(
+data class AuthorDTO(
     var id: Int,
     var name: String,
     var birthDate: Long,

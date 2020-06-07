@@ -1,9 +1,9 @@
 package com.example.model.dc
 
-data class Book(
+data class BookDTO(
     var id: Int,
     var name: String,
     var pages: Int,
     var date: Long,
-    var author: Author? = null
+    var author: AuthorDTO? = null
 )

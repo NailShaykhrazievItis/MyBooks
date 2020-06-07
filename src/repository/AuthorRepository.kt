@@ -1,17 +1,17 @@
 package com.example.repository
 
-import com.example.model.dc.Author
-import org.jetbrains.exposed.sql.transactions.experimental.TransactionResult
+import com.example.model.dc.AuthorDTO
+import kotlinx.coroutines.Deferred
 
 interface AuthorRepository {
 
-    suspend fun getAllBooks(): TransactionResult<List<Author>>
+    suspend fun getAll(): Deferred<List<AuthorDTO>>
 
-    suspend fun getBook(id: Int): TransactionResult<Author?>
+    suspend fun getAuthor(id: Int): Deferred<AuthorDTO?>
 
-    suspend fun addBook(book: Author)
+    suspend fun addAuthor(author: AuthorDTO)
 
-    suspend fun deleteBook(id: Int)
+    suspend fun deleteAuthor(id: Int)
 
     suspend fun clear()
 }
