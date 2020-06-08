@@ -5,7 +5,7 @@ val exposed_version: String by project
 
 plugins {
     application
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.71"
 }
 
 group = "com.example"
@@ -31,13 +31,22 @@ dependencies {
     compile("io.ktor:ktor-gson:$ktor_version")
     compile("io.ktor:ktor-client-core:$ktor_version")
     compile("io.ktor:ktor-client-core-jvm:$ktor_version")
+    compile("io.ktor:ktor-auth-jwt:$ktor_version")
 
     compile("ch.qos.logback:logback-classic:$logback_version")
 
-    compile("org.jetbrains.exposed:exposed:$exposed_version")
+//    compile 'org.litote.kmongo:kmongo:4.0.1'
+//    compile("org.mongodb:mongodb-driver:3.12.2")
+
+    compile("org.jetbrains.exposed", "exposed-core", exposed_version)
+    compile("org.jetbrains.exposed", "exposed-dao", exposed_version)
+    compile("org.jetbrains.exposed", "exposed-jdbc", exposed_version)
+    compile("org.jetbrains.exposed", "exposed-jodatime", exposed_version)
     compile("org.postgresql:postgresql:42.2.8")
 
-    compile("org.koin:koin-ktor:2.0.1")
+    compile("org.koin:koin-ktor:2.1.5")
+
+    compile("ch.qos.logback:logback-classic:1.2.3")
 
     testCompile("io.ktor:ktor-server-tests:$ktor_version")
 }
