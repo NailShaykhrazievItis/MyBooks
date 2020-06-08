@@ -1,15 +1,15 @@
 package com.example.repository
 
-import com.example.model.dc.AuthorDTO
+import com.example.model.dc.Author
 import kotlinx.coroutines.Deferred
 
 interface AuthorRepository {
 
-    suspend fun getAll(): Deferred<List<AuthorDTO>>
+    suspend fun getAll(): Deferred<List<Author>>
 
-    suspend fun getAuthor(id: Int): Deferred<AuthorDTO?>
+    suspend fun getAuthor(id: Int): Deferred<Author?>
 
-    suspend fun addAuthor(author: AuthorDTO)
+    suspend fun addAuthor(author: Author)
 
     suspend fun deleteAuthor(id: Int)
 

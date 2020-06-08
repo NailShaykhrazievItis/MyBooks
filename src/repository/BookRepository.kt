@@ -1,17 +1,17 @@
 package com.example.repository
 
-import com.example.model.dc.BookDTO
+import com.example.model.dc.Book
 import kotlinx.coroutines.Deferred
 
 interface BookRepository {
 
-    suspend fun getAllBooks(): Deferred<List<BookDTO>>
+    suspend fun getAllBooks(): Deferred<List<Book>>
 
-    suspend fun getBook(id: Int): Deferred<BookDTO?>
+    suspend fun getBook(id: Int): Deferred<Book?>
 
-    suspend fun addBook(book: BookDTO)
+    suspend fun addBook(book: Book)
 
-    suspend fun update(id: Int, book: BookDTO)
+    suspend fun update(id: Int, book: Book)
 
     suspend fun deleteBook(id: Int)
 

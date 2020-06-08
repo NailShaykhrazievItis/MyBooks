@@ -31,6 +31,7 @@ dependencies {
     compile("io.ktor:ktor-gson:$ktor_version")
     compile("io.ktor:ktor-client-core:$ktor_version")
     compile("io.ktor:ktor-client-core-jvm:$ktor_version")
+    compile("io.ktor:ktor-auth-jwt:$ktor_version")
 
     compile("ch.qos.logback:logback-classic:$logback_version")
 
@@ -44,6 +45,8 @@ dependencies {
     compile("org.postgresql:postgresql:42.2.8")
 
     compile("org.koin:koin-ktor:2.1.5")
+
+    compile("ch.qos.logback:logback-classic:1.2.3")
 
     testCompile("io.ktor:ktor-server-tests:$ktor_version")
 }

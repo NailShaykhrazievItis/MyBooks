@@ -1,7 +1,7 @@
 package com.example.repository
 
-import com.example.model.dc.BookDTO
-import com.example.model.entity.Book
+import com.example.model.dc.Book
+import com.example.model.entity.BookDB
 import com.example.model.entity.Books
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -14,16 +14,16 @@ import org.joda.time.DateTime
 class BookRepositoryImpl(private val db: Database) : BookRepository {
 
     override suspend fun getAllBooks() = suspendedTransactionAsync(Dispatchers.IO, db) {
-        Book.all().map { it.toBook() }
+        BookDB.all().map { it.toBook() }
     }
 
-    override suspend fun getBook(id: Int): Deferred<BookDTO?> = suspendedTransactionAsync(Dispatchers.IO, db) {
-        Book.findById(id)?.toBook()
+    override suspend fun getBook(id: Int): Deferred<Book?> = suspendedTransactionAsync(Dispatchers.IO, db) {
+        BookDB.findById(id)?.toBook()
     }
 
-    override suspend fun addBook(book: BookDTO) {
+    override suspend fun addBook(book: Book) {
         newSuspendedTransaction(Dispatchers.IO, db) {
-            Book.new {
+            BookDB.new {
                 name = book.name
                 pages = book.pages
                 date = DateTime(book.date)
@@ -31,9 +31,9 @@ class BookRepositoryImpl(private val db: Database) : BookRepository {
         }
     }
 
-    override suspend fun update(id: Int, book: BookDTO) {
+    override suspend fun update(id: Int, book: Book) {
         newSuspendedTransaction(Dispatchers.IO, db) {
-            Book.findById(id)?.apply {
+            BookDB.findById(id)?.apply {
                 name = book.name
                 pages = book.pages
                 date = DateTime(book.date)
@@ -43,7 +43,7 @@ class BookRepositoryImpl(private val db: Database) : BookRepository {
 
     override suspend fun deleteBook(id: Int) {
         newSuspendedTransaction(Dispatchers.IO, db) {
-            Book.findById(id)?.delete()
+            BookDB.findById(id)?.delete()
         }
     }
 
