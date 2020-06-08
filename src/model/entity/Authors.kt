@@ -1,6 +1,6 @@
 package com.example.model.entity
 
-import com.example.model.dc.AuthorDTO
+import com.example.model.dc.Author
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -13,14 +13,14 @@ object Authors : IntIdTable() {
     val deathDate = date("death_date")
 }
 
-class Author(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<Author>(Authors)
+class AuthorDB(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<AuthorDB>(Authors)
 
     var name by Authors.name
     var birthDate by Authors.birthDate
     var deathDate by Authors.deathDate
 
-    fun toAuthor() = AuthorDTO(
+    fun toAuthor() = Author(
         id = id.value,
         name = name,
         birthDate = birthDate.millis,

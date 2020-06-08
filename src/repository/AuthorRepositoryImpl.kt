@@ -1,7 +1,7 @@
 package com.example.repository
 
-import com.example.model.dc.AuthorDTO
-import com.example.model.entity.Author
+import com.example.model.dc.Author
+import com.example.model.entity.AuthorDB
 import com.example.model.entity.Authors
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -13,19 +13,19 @@ import org.joda.time.DateTime
 
 class AuthorRepositoryImpl(private val db: Database) : AuthorRepository {
 
-    override suspend fun getAll(): Deferred<List<AuthorDTO>> =
+    override suspend fun getAll(): Deferred<List<Author>> =
         suspendedTransactionAsync(Dispatchers.IO, db) {
-            Author.all().map { it.toAuthor() }
+            AuthorDB.all().map { it.toAuthor() }
         }
 
-    override suspend fun getAuthor(id: Int): Deferred<AuthorDTO?> =
+    override suspend fun getAuthor(id: Int): Deferred<Author?> =
         suspendedTransactionAsync(Dispatchers.IO, db) {
-            Author.findById(id)?.toAuthor()
+            AuthorDB.findById(id)?.toAuthor()
         }
 
-    override suspend fun addAuthor(author: AuthorDTO) {
+    override suspend fun addAuthor(author: Author) {
         newSuspendedTransaction(Dispatchers.IO, db) {
-            Author.new {
+            AuthorDB.new {
                 name = author.name
                 birthDate = DateTime(author.birthDate)
                 deathDate = DateTime(author.deathDateTime)
@@ -35,7 +35,7 @@ class AuthorRepositoryImpl(private val db: Database) : AuthorRepository {
 
     override suspend fun deleteAuthor(id: Int) {
         newSuspendedTransaction {
-            Author.findById(id)?.delete()
+            AuthorDB.findById(id)?.delete()
         }
     }
 

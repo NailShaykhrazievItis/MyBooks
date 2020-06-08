@@ -6,3 +6,6 @@ data class ErrorMessage(
 
     fun toJson() = mapOf("error" to message)
 }
+
+inline fun errorJson(message: String) = ErrorMessage(message).toJson()
+inline fun errorMissingFields() = errorJson("Missing Fields")

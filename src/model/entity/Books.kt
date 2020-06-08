@@ -1,6 +1,6 @@
 package com.example.model.entity
 
-import com.example.model.dc.BookDTO
+import com.example.model.dc.Book
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -14,15 +14,15 @@ object Books : IntIdTable() {
     val author = reference("author_id", Authors).nullable()
 }
 
-class Book(id: EntityID<Int>) : IntEntity(id) {
-    companion object : IntEntityClass<Book>(Books)
+class BookDB(id: EntityID<Int>) : IntEntity(id) {
+    companion object : IntEntityClass<BookDB>(Books)
 
     var name by Books.name
     var pages by Books.pages
     var date by Books.date
-    var author by Author optionalReferencedOn Books.author
+    var author by AuthorDB optionalReferencedOn Books.author
 
-    fun toBook(): BookDTO = BookDTO(
+    fun toBook(): Book = Book(
         id = id.value,
         name = name,
         pages = pages,
